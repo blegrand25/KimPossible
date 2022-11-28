@@ -42,11 +42,16 @@ public class BasicGameApp implements Runnable {
     public Image kimmyPic;
     public Image backgroundPic;
 
+    public Image rufusPic;
+
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
     private KimmyP ronny;
 
     public KimmyP kimmy;
+
+    public KimmyP rufus;
+
 
     // Main method definition
     // This is the code that runs first and automatically
@@ -65,7 +70,6 @@ public class BasicGameApp implements Runnable {
         backgroundPic = Toolkit.getDefaultToolkit().getImage("buenonacho.png");
 
         ronnyPic = Toolkit.getDefaultToolkit().getImage("ronstoppable.png");
-
         ronny = new KimmyP("ronny",10,100); //construct ron
         ronny.dx = -ronny.dx;
 
@@ -73,6 +77,9 @@ public class BasicGameApp implements Runnable {
         kimmy = new KimmyP("kimmy", 800, 70);
         kimmy.ypos = 100;
 
+        rufusPic = Toolkit.getDefaultToolkit().getImage("rufus.png");
+        rufus = new KimmyP("rufus",500, 20);
+        rufus.dy = 3;
 
     }
 
@@ -94,15 +101,19 @@ public class BasicGameApp implements Runnable {
     public void moveThings() {
         //calls the move( ) code in the objects
 //        ronny.move();
-        ronny.wrap();
+        ronny.bounce();
         kimmy.bounce();
-    }
+        rufus.bounce();
+
+
+    } // this method is the code that calls the characters to move around on the screen
 
     public void crash(){
-        if (ronny.rec.intersects(kimmy.rec)){
+        if (ronny.rec.intersects(rufus.rec) && ronny.isCrashing == false){
+            ronny.isCrashing = true;
             ronny.dx = -ronny.dx;
-            kimmy.dx = -kimmy.dx;
-        }
+            rufus.dx = -rufus.dx;
+        }// this method is for when the ron and kim images crash into each other to ......
 
     }
 
@@ -156,12 +167,9 @@ public class BasicGameApp implements Runnable {
 
         g.drawImage(kimmyPic, kimmy.xpos, kimmy.ypos, kimmy.width, kimmy.height, null);
 
-        g.drawRect(kimmy.rec.x, kimmy.rec.y, kimmy.rec.width, kimmy.rec.height);
-        g.drawRect(ronny.rec.x, ronny.rec.y, ronny.rec.width, ronny.rec.height);
+        g.drawImage(rufusPic, rufus.xpos, rufus.ypos, rufus.width, rufus.height,null);
 
         g.dispose();
         bufferStrategy.show();
-
-
-    }
+    }// this is the method that draws all the images in the aquarium game
 }

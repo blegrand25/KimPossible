@@ -13,17 +13,18 @@ public class KimmyP {
     public int height;                //the height of the hero image
     public boolean isAlive;           //a boolean to denote if the hero is alive or dead
     public Rectangle rec; // also able to do astro.red now
+    public boolean isCrashing = false;
 
 
     //This is a constructor that takes 3 parameters.
     // This allows us to specify the hero's name and position when we build it.
-    public KimmyP(String pName, int pXpos, int pYpos) { // Astronaut constructor
+    public KimmyP(String pName, int pXpos, int pYpos) { // KimmyP Constructor
         name = pName;
         xpos = (int)(Math.random()*400+100);
         ypos = pYpos;
 //        ypos = (int)(Math.random()*150 + 50);//150 the amount of possible number
         dx = 6;
-        dy = 5;
+        dy = 6;
         width = 90;
         height = 90;
         isAlive = true;
@@ -32,7 +33,6 @@ public class KimmyP {
 
     }
 
-    // how do i make it go in another direction because when you add another method it doesnt work
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
@@ -57,7 +57,6 @@ public class KimmyP {
 
     }
 
-
     public void wrap(){
         xpos = xpos + dx;
         ypos = ypos + dy;
@@ -80,6 +79,7 @@ public class KimmyP {
 
         rec = new Rectangle(xpos, ypos, width, height);
     }
+
 }
 
 

@@ -40,9 +40,10 @@ public class BasicGameApp implements Runnable {
     public BufferStrategy bufferStrategy;
     public Image ronnyPic;
     public Image kimmyPic;
+    public Image shegoPic;
     public Image backgroundPic;
-
     public Image rufusPic;
+    public Image drakkenPic;
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -51,6 +52,9 @@ public class BasicGameApp implements Runnable {
     public KimmyP kimmy;
 
     public KimmyP rufus;
+
+    public KimmyP shego;
+    public KimmyP drakken;
 
 
     // Main method definition
@@ -71,7 +75,7 @@ public class BasicGameApp implements Runnable {
 
         ronnyPic = Toolkit.getDefaultToolkit().getImage("ronstoppable.png");
         ronny = new KimmyP("ronny",10,100); //construct ron
-        ronny.dx = -ronny.dx;
+        ronny.dx = 9;
 
         kimmyPic = Toolkit.getDefaultToolkit().getImage("kimmyp2.png");
         kimmy = new KimmyP("kimmy", 800, 70);
@@ -80,6 +84,14 @@ public class BasicGameApp implements Runnable {
         rufusPic = Toolkit.getDefaultToolkit().getImage("rufus.png");
         rufus = new KimmyP("rufus",500, 20);
         rufus.dy = 3;
+
+        shegoPic = Toolkit.getDefaultToolkit().getImage("shego.png");
+        shego = new KimmyP("shego", 300, 250);
+        shego.dy = 12;
+
+        drakkenPic = Toolkit.getDefaultToolkit().getImage("drakken.png");
+        drakken = new KimmyP ("drakken", 400, 600);
+        drakken.dx = 9;
 
     }
 
@@ -96,6 +108,8 @@ public class BasicGameApp implements Runnable {
             crasher();
             render();  // paint the graphics
             pause(40); // sleep for 10 ms
+            attack();
+            savior();
         }
     }
 // astro is ron and alien is kimmy
@@ -105,6 +119,7 @@ public class BasicGameApp implements Runnable {
         ronny.bounce();
         kimmy.bounce();
         rufus.bounce();
+        shego.bounce();
 
 
     } // this method is the code that calls the characters to move around on the screen
@@ -119,6 +134,30 @@ public class BasicGameApp implements Runnable {
         if (ronny.rec.intersects(kimmy.rec) == false) {
             ronny.isCrashing = false;
         }
+    }
+
+    public void attack (){
+        if (shego.rec.intersects(ronny.rec) && shego.isCrashing == false){
+            shego.isCrashing = true;
+            ronny.isAlive = false;
+        }
+
+        if(shego.rec.intersects(ronny.rec) == false) {
+            shego.isCrashing = false;
+        }
+
+    }
+
+    public void savior(){
+        if (rufus.rec.intersects(shego.rec) && rufus.isCrashing == false){
+            rufus.isCrashing = true;
+            kimmy.isAlive = true;
+        }
+
+        if (rufus.rec.intersects(shego.rec) == false){
+            rufus.isCrashing = false;
+        }
+
     }
 
     public void crasher(){
@@ -185,9 +224,9 @@ public class BasicGameApp implements Runnable {
         }
 
         g.drawImage(kimmyPic, kimmy.xpos, kimmy.ypos, kimmy.width, kimmy.height, null);
-
-
         g.drawImage(rufusPic, rufus.xpos, rufus.ypos, rufus.width, rufus.height,null);
+        g.drawImage(shegoPic, shego.xpos, shego.ypos, shego.width, shego.height, null);
+        g.drawImage(drakkenPic, drakken.xpos, drakken.ypos, drakken.width, drakken.height, null);
 
         g.dispose();
         bufferStrategy.show();

@@ -93,6 +93,7 @@ public class BasicGameApp implements Runnable {
         while (true) { // while loop says do this thing until condition is met
             moveThings();  //move all the game objects
             crash();
+            crasher();
             render();  // paint the graphics
             pause(40); // sleep for 10 ms
         }
@@ -109,13 +110,30 @@ public class BasicGameApp implements Runnable {
     } // this method is the code that calls the characters to move around on the screen
 
     public void crash(){
-        if (ronny.rec.intersects(rufus.rec) && ronny.isCrashing == false){
+        if (ronny.rec.intersects(kimmy.rec) && ronny.isCrashing == false){
             ronny.isCrashing = true;
             ronny.dx = -ronny.dx;
-            rufus.dx = -rufus.dx;
+            kimmy.dx = -kimmy.dx;
         }// this method is for when the ron and kim images crash into each other to ......
 
+        if (ronny.rec.intersects(kimmy.rec) == false) {
+            ronny.isCrashing = false;
+        }
     }
+
+    public void crasher(){
+        if (kimmy.rec.intersects(rufus.rec) && kimmy.isCrashing == false) {
+            kimmy.isCrashing = false;
+            kimmy.dy = -kimmy.dy;
+            rufus.dy = -rufus.dy;
+        }
+
+        if (kimmy.rec.intersects(rufus.rec) == false){
+            kimmy.isCrashing = false;
+        }
+    }
+
+
 
     //Pauses or sleeps the computer for the amount specified in milliseconds
     public void pause(int time ) {
@@ -163,9 +181,11 @@ public class BasicGameApp implements Runnable {
 
         if (ronny.isAlive == true) {
             g.drawImage(ronnyPic, ronny.xpos, ronny.ypos, ronny.width, ronny.height, null);
+
         }
 
         g.drawImage(kimmyPic, kimmy.xpos, kimmy.ypos, kimmy.width, kimmy.height, null);
+
 
         g.drawImage(rufusPic, rufus.xpos, rufus.ypos, rufus.width, rufus.height,null);
 

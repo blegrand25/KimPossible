@@ -80,6 +80,8 @@ public class KimmyP {
         rec = new Rectangle(xpos, ypos, width, height);
     }
 
+
+
 }
 
 

@@ -44,6 +44,7 @@ public class BasicGameApp implements Runnable {
     public Image backgroundPic;
     public Image rufusPic;
     public Image drakkenPic;
+    public Image backgroundPicpart2;
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -73,6 +74,8 @@ public class BasicGameApp implements Runnable {
 
         backgroundPic = Toolkit.getDefaultToolkit().getImage("buenonacho.png");
 
+        backgroundPicpart2 = Toolkit.getDefaultToolkit().getImage("drakkenlab.jpeg");
+
         ronnyPic = Toolkit.getDefaultToolkit().getImage("ronstoppable.png");
         ronny = new KimmyP("ronny",10,100); //construct ron
         ronny.dx = 9;
@@ -92,6 +95,8 @@ public class BasicGameApp implements Runnable {
         drakkenPic = Toolkit.getDefaultToolkit().getImage("drakken.png");
         drakken = new KimmyP ("drakken", 400, 600);
         drakken.dx = 9;
+
+
 
     }
 
@@ -118,9 +123,9 @@ public class BasicGameApp implements Runnable {
 //        ronny.move();
         ronny.bounce();
         kimmy.bounce();
-        rufus.bounce();
+        rufus.wrap();
         shego.bounce();
-
+        drakken.bounce();
 
     } // this method is the code that calls the characters to move around on the screen
 
@@ -147,7 +152,6 @@ public class BasicGameApp implements Runnable {
         }
 
     }
-
     public void savior(){
         if (rufus.rec.intersects(shego.rec) && rufus.isCrashing == false){
             rufus.isCrashing = true;
@@ -171,6 +175,19 @@ public class BasicGameApp implements Runnable {
             kimmy.isCrashing = false;
         }
     }
+
+    public void change(){
+        if (drakken.rec.intersects(kimmy.rec) && drakken.isCrashing == false){
+            drakken.isCrashing = false;
+            drakken.dy = drakken.dy;
+            kimmy.dy = -kimmy.dy;
+        }
+
+        if (drakken.rec.intersects(kimmy.rec)== false){
+            drakken.isCrashing = false;
+        }
+    }
+
 
 
 

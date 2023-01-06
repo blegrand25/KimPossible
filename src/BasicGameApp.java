@@ -74,7 +74,6 @@ public class BasicGameApp implements Runnable {
 
         backgroundPic = Toolkit.getDefaultToolkit().getImage("buenonacho.png");
 
-        backgroundPicpart2 = Toolkit.getDefaultToolkit().getImage("drakkenlab.jpeg");
 
         ronnyPic = Toolkit.getDefaultToolkit().getImage("ronstoppable.png");
         ronny = new KimmyP("ronny",10,100); //construct ron

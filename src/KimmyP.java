@@ -14,6 +14,10 @@ public class KimmyP {
     public boolean isAlive;           //a boolean to denote if the hero is alive or dead
     public Rectangle rec; // also able to do astro.red now
     public boolean isCrashing = false;
+    public boolean left;
+    public boolean up;
+    public boolean right;
+    public boolean down;
 
 
     //This is a constructor that takes 3 parameters.
@@ -42,6 +46,30 @@ public class KimmyP {
     } // end move
 
     public void bounce(){
+
+        if (left == true){
+            dx = -5;
+            dy=0;
+        }
+
+        if (right == true){
+            dx = 5;
+            dy=0;
+        }
+
+        if (down == true){
+            dx = 0;
+            dy=-5;
+        }
+
+        if (up == true){
+            dx = 0;
+            dy=5;
+        }
+
+
+
+
         xpos = xpos + dx;
         ypos = ypos + dy;
 

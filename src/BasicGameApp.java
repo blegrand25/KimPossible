@@ -13,6 +13,8 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -22,7 +24,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -69,6 +71,8 @@ public class BasicGameApp implements Runnable {
     // This section is the setup portion of the program
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() {
+
+
         // randomizing object math.random--> decimal in the range from 0-1
         setUpGraphics();
 
@@ -211,6 +215,7 @@ public class BasicGameApp implements Runnable {
         canvas = new Canvas();
         canvas.setBounds(0, 0, WIDTH, HEIGHT);
         canvas.setIgnoreRepaint(true);
+        canvas.addKeyListener(this);
 
         panel.add(canvas);  // adds the canvas to the panel.
 
@@ -247,4 +252,35 @@ public class BasicGameApp implements Runnable {
         g.dispose();
         bufferStrategy.show();
     }// this is the method that draws all the images in the aquarium game
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        char key = e.getKeyChar();     //gets the character of the key pressed
+        int keyCode = e.getKeyCode();  //gets the keyCode (an integer) of the key pressed
+        System.out.println("Key Pressed: " + key + "  Code: " + keyCode);
+
+        if (keyCode == 39) {
+            kimmy.right = true;
+        }
+        if (keyCode == 40) {
+            kimmy.down = true;
+        }
+        if (keyCode == 38){
+            kimmy.up = true;
+        }
+        if (keyCode == 37){
+            kimmy.left = true;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
